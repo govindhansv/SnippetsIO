@@ -1,35 +1,118 @@
-<header class="p-4 bg-gray-100 text-gray-800">
-  <div class="container flex justify-between h-16 mx-auto">
-    <a rel="noopener noreferrer" href="#" aria-label="Back to homepage" class="flex items-center p-2">
-      <h1 class="font-lg">Snippets</h1>
-    </a>
-    <ul class="items-stretch hidden space-x-3 lg:flex">
-      <li class="flex">
-        <a rel="noopener noreferrer" href="/addpost"
-          class="flex items-center px-4 -mb-1 border-b-2 border-transparent">Add</a>
-      </li>
-      <li class="flex">
-        <a rel="noopener noreferrer" href="/editpost"
-          class="flex items-center px-4 -mb-1 border-b-2 border-transparent">Edit</a>
-      </li>
-      <li class="flex">
-        <a rel="noopener noreferrer" href="/"
-          class="flex items-center px-4 -mb-1 border-b-2 border-transparent">Home</a>
-      </li>
-      <li class="flex">
-        <a rel="noopener noreferrer" href="/docs"
-          class="flex items-center px-4 -mb-1 border-b-2 border-transparent">Docs</a>
-      </li>
-    </ul>
-    <div class="items-center flex-shrink-0 hidden lg:flex">
-      <button class="self-center px-8 py-3 rounded">Sign in</button>
-      <button class="self-center px-8 py-3 font-semibold rounded bg-violet-600 text-gray-50">Sign up</button>
-    </div>
-    <button class="p-4 lg:hidden">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-        class="w-6 h-6 text-gray-800">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-      </svg>
-    </button>
+<nav class="nav">
+  <a href="/" class="logo">Snippets.io</a>
+
+  <div class="hamburger">
+    <span class="line"></span>
+    <span class="line"></span>
+    <span class="line"></span>
   </div>
-</header>
+
+  <div class="nav__link hide">
+    <a class="item" href="/">Home</a>
+    <a class="item" href="/addpost">Add Snippet</a>
+    <a class="item" href="/docs">Docs</a>
+    <a class="item" href="/about">About</a>
+  </div>
+</nav>
+
+
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: sans-serif;
+  }
+
+  .item {
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    color: rgb(5, 5, 116);
+    padding-left: 20px;
+    font-weight: 800;
+  }
+
+  .hamburger {
+    padding-right: 20px;
+    cursor: pointer;
+  }
+
+  .hamburger .line {
+    display: block;
+    width: 35px;
+    height: 4px;
+    margin-bottom: 6px;
+    background-color: black;
+  }
+
+  .nav__link {
+    position: fixed;
+    width: 94%;
+    top: 5rem;
+    left: 18px;
+    background-color: lightblue;
+  }
+
+  .nav__link a {
+    display: block;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .nav__link a:hover {
+    background-color: lightcoral;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  @media screen and (min-width: 600px) {
+    .nav__link {
+      display: inline-block;
+      position: static;
+      width: auto;
+      margin-right: 20px;
+      background: none;
+    }
+
+    .nav__link a {
+      display: inline-block;
+      padding: 15px 20px;
+    }
+
+    .hamburger {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const hamburger = document.querySelector('.hamburger');
+const navLink = document.querySelector('.nav__link');
+
+hamburger.addEventListener('click', () => {
+  navLink.classList.toggle('hide');
+});
+
+
+</script>

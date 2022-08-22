@@ -1,6 +1,12 @@
-{{#each data}}
-<div class="my-5 flex">
-    <h1>{{this.name}}</h1>
-    <a href="/editpost/{{this._id}}">Edit</a>
+<div class=" w-90 h-100 mx-10">
+
+    {{#each data}}
+
+    <div class="my-2 flex border border-black rounded m-3 h-16 p-3 items-center justify-center w-64">
+        <h1>{{this.name}}</h1>
+        <a class="ml-5" href="/editpost/{{this._id}}">Edit</a>
+        <a class="ml-5" href="/deletepost/{{this._id}}">Delete</a>
+    </div>
+
+    {{/each}}
 </div>
-{{/each}}

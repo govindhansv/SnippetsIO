@@ -1,6 +1,47 @@
-<form action="/editpost" methode="/post">
-    <h1>{{data.name}} <br> </h1>
-    new input
-    <input name="name" class="m-2 w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600" type="text">
-    <button type="submit">submit</button>
+<div class="flex flex-col justify-center w-100">
+
+<form action="/editpost" method="post" class="my-3">
+	<h1 class="text-2xl font-bold text-center">Snippet</h1>
+    <br>
+    <code class="py-3 rounded text-gray-800">{{data.name}}</code>
+    <br>
+    <code class="py-3 rounded text-gray-800">{{data.schema}}</code>
+    <br>
+    <code class="py-3 rounded text-gray-800">{{data.frontend}}</code>
+    <br>
+    <code class="py-3 rounded text-gray-800">{{data.backend}}</code>
+    <br>
+    <code class="py-3 rounded text-gray-800">{{data.linking}}</code>
+    <br>
 </form>
+
+
+<div class="w-full max-w-md p-8 space-y-3 rounded-xl bg-gray-50 text-gray-800">
+	<h1 class="text-2xl font-bold text-center">Add Post</h1>
+	<form action="/addpost" method="post" class="space-y-6 ng-untouched ng-pristine ng-valid">
+		<div class="space-y-1 text-sm">
+		</div>
+		<div class="flex flex-col w-full">
+
+			<label for="name" class="block text-gray-600">Function</label>
+			<input type="text" name="name" id="name" placeholder="Name" class="my-5 w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600">
+
+			<label for="Frontend" class="block text-gray-600">Frontend</label>
+			<textarea rows="3" id="Frontend" name="frontend" placeholder="Frontend..." class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50"></textarea>
+
+			<label for="Backend" class="block text-gray-600">Backend</label>
+			<textarea rows="3" id="Backend" name="backend" placeholder="Backend..." class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50"></textarea>
+
+			<label for="Database Schema" class="block text-gray-600">Database Schema</label>
+			<textarea rows="3" name="schema" id="Database Schema" placeholder="Database Schema..." class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50"></textarea>
+
+			<label for="Linking" class="block text-gray-600">Linking</label>
+			<textarea rows="3" name="linking" id="Linking" placeholder="Linking..." class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50"></textarea>
+
+			<button type="button" class="py-4 my-8 font-semibold rounded-md text-gray-50 bg-violet-600">Add Post</button>
+		</div>
+
+	</form>
+</div>
+
+</div>

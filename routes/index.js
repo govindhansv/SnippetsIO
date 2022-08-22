@@ -44,31 +44,52 @@ router.get('/editpost/:id', async function (req, res) {
   res.render('forms/editpost',{data});
 });
 
-router.get('/deletelist/:id', async function (req, res) {
-  let id = req.params.id
-  db.get().collection('list').deleteOne({ id: ObjectId(id), userid: req.session.user })
-  res.redirect('back')
-});
-
-router.get('/delete/:id', async function (req, res) {
-  let id = req.params.id
-  db.get().collection('data').deleteOne({ _id: ObjectId(id) })
-  res.redirect('back')
-});
-
-router.get('/edit/:id', async function (req, res) {
-  let id = req.params.id
-  let data = await db.get().collection('data').findOne({ _id: ObjectId(id) })
-  res.render('edit', { data })
-});
-
-router.post('/edit', async function (req, res) {
+router.post('/editpost', async function (req, res) {
+  console.log("called");
   let newdata = req.body.name
+  console.log(newdata);
   let query = { _id: ObjectId(req.body.id) }
   var newvalues = { $set: { name: newdata } };
   db.get().collection('data').updateOne(query, newvalues)
-  res.redirect(req.session.url)
+  res.redirect('/')
 });
+
+router.get('/deletepost/:id', async function (req, res) {
+  let id = req.params.id
+  db.get().collection('data').deleteOne({ _id: ObjectId(id) })
+  res.redirect('/')
+});
+
+router.get("/about", (req, res) => {
+  res.render("pages/about")
+});
+
+
+// router.get('/deletelist/:id', async function (req, res) {
+//   let id = req.params.id
+//   db.get().collection('list').deleteOne({ id: ObjectId(id), userid: req.session.user })
+//   res.redirect('back')
+// });
+
+// router.get('/delete/:id', async function (req, res) {
+//   let id = req.params.id
+//   db.get().collection('data').deleteOne({ _id: ObjectId(id) })
+//   res.redirect('back')
+// });
+
+// router.get('/edit/:id', async function (req, res) {
+//   let id = req.params.id
+//   let data = await db.get().collection('data').findOne({ _id: ObjectId(id) })
+//   res.render('edit', { data })
+// });
+
+// router.post('/edit', async function (req, res) {
+//   let newdata = req.body.name
+//   let query = { _id: ObjectId(req.body.id) }
+//   var newvalues = { $set: { name: newdata } };
+//   db.get().collection('data').updateOne(query, newvalues)
+//   res.redirect(req.session.url)
+// });
 
 
 // router.get('/login', function (req, res) {

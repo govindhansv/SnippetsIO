@@ -32,27 +32,34 @@ router.get('/admin', async function (req, res) {
   res.render('pages/admin',{data});
 });
 
+router.get("/about", (req, res) => {
+  res.render("pages/about")
+});
+
+
+
+
+
+
+
 router.get('/addpost', async function (req, res) {
   res.render('forms/addpost');
 });
 
 router.post('/addpost', async function (req, res) {
   let data = req.body
-  console.log(data);
   await db.get().collection('data').insertOne(data)
-  res.redirect('/')
+  res.render('pages/snippet',{data})
 });
 
 router.get('/editpost/:id', async function (req, res) {
   let id = req.params.id
   let data = await db.get().collection('data').findOne({ _id: ObjectId(id) })
-  console.log(data);
   res.render('forms/editpost',{data});
 });
 
 router.post('/editpost', async function (req, res) {
   let newdata = req.body
-  console.log(newdata);
   let query = { _id: ObjectId(req.body.id) }
   var newvalues = { $set: { name: newdata.name , desc:newdata.desc, backend:newdata.backend, frontend:newdata.frontend , schema:newdata.schema , linking:newdata.linking}};
   await db.get().collection('data').updateOne(query, newvalues)
@@ -68,13 +75,54 @@ router.get('/deletepost/:id', async function (req, res) {
 router.get('/snippet/:id', async function (req, res) {
   let id = req.params.id
   let data = await db.get().collection('data').findOne({ _id: ObjectId(id) })
-  console.log(data);
   res.render('pages/snippet',{data});
 });
 
-router.get("/about", (req, res) => {
-  res.render("pages/about")
+
+
+
+
+router.get('/addcode', async function (req, res) {
+  res.render('forms/addcode');
 });
+
+router.post('/addcode', async function (req, res) {
+  let data = req.body
+  await db.get().collection('data').insertOne(data)
+  res.render('pages/snippet',{data})
+});
+
+router.get('/editcode/:id', async function (req, res) {
+  let id = req.params.id
+  let data = await db.get().collection('data').findOne({ _id: ObjectId(id) })
+  res.render('forms/editcode',{data});
+});
+
+router.post('/editcode', async function (req, res) {
+  let newdata = req.body
+  let query = { _id: ObjectId(req.body.id) }
+  var newvalues = { $set: { name: newdata.name , desc:newdata.desc, backend:newdata.backend, frontend:newdata.frontend , schema:newdata.schema , linking:newdata.linking}};
+  await db.get().collection('data').updateOne(query, newvalues)
+  res.redirect(`/code/${req.body.id}`)
+});
+
+router.get('/deletecode/:id', async function (req, res) {
+  let id = req.params.id
+  await db.get().collection('data').deleteOne({ _id: ObjectId(id) })
+  res.redirect('back')
+});
+
+router.get('/code/:id', async function (req, res) {
+  let id = req.params.id
+  let data = await db.get().collection('data').findOne({ _id: ObjectId(id) })
+  res.render('pages/code',{data});
+});
+
+
+
+
+
+
 
 
 // router.get('/deletelist/:id', async function (req, res) {

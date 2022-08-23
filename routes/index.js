@@ -3,6 +3,7 @@ var router = express.Router();
 var db = require('../connection')
 var fun = require('../functions')
 var ObjectId = require('mongodb').ObjectId
+const copy = require('clipboard-copy')
 
 
 /* GET home page. */
@@ -26,6 +27,11 @@ router.get('/', async function (req, res) {
   res.render('pages/home',{data});
 });
 
+router.get('/admin', async function (req, res) {
+  let data = await db.get().collection('data').find().toArray()
+  res.render('pages/admin',{data});
+});
+
 router.get('/addpost', async function (req, res) {
   res.render('forms/addpost');
 });
@@ -33,7 +39,7 @@ router.get('/addpost', async function (req, res) {
 router.post('/addpost', async function (req, res) {
   let data = req.body
   console.log(data);
-  db.get().collection('data').insertOne(data)
+  await db.get().collection('data').insertOne(data)
   res.redirect('/')
 });
 
@@ -45,19 +51,25 @@ router.get('/editpost/:id', async function (req, res) {
 });
 
 router.post('/editpost', async function (req, res) {
-  console.log("called");
-  let newdata = req.body.name
+  let newdata = req.body
   console.log(newdata);
   let query = { _id: ObjectId(req.body.id) }
-  var newvalues = { $set: { name: newdata } };
-  db.get().collection('data').updateOne(query, newvalues)
-  res.redirect('/')
+  var newvalues = { $set: { name: newdata.name , desc:newdata.desc, backend:newdata.backend, frontend:newdata.frontend , schema:newdata.schema , linking:newdata.linking}};
+  await db.get().collection('data').updateOne(query, newvalues)
+  res.redirect(`/snippet/${req.body.id}`)
 });
 
 router.get('/deletepost/:id', async function (req, res) {
   let id = req.params.id
-  db.get().collection('data').deleteOne({ _id: ObjectId(id) })
-  res.redirect('/')
+  await db.get().collection('data').deleteOne({ _id: ObjectId(id) })
+  res.redirect('back')
+});
+
+router.get('/snippet/:id', async function (req, res) {
+  let id = req.params.id
+  let data = await db.get().collection('data').findOne({ _id: ObjectId(id) })
+  console.log(data);
+  res.render('pages/snippet',{data});
 });
 
 router.get("/about", (req, res) => {

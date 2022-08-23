@@ -1,12 +1,31 @@
-<div class=" w-90 h-100 mx-10">
-
-    {{#each data}}
-
-    <div class="my-2 flex border border-black rounded m-3 h-16 p-3 items-center justify-center w-64">
-        <h1>{{this.name}}</h1>
-        <a class="ml-5" href="/editpost/{{this._id}}">Edit</a>
-        <a class="ml-5" href="/deletepost/{{this._id}}">Delete</a>
+<div>
+    {{>searchbar}}
+    <div class="center">
+        <div class="width">
+            {{#each data}}
+            <a href="/snippet/{{this._id}}"
+                class=" mb-8 block p-6 bg-grey-100 rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    {{this.name}}</h5>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{{this.desc}}</p>
+            </a>
+            {{/each}}
+        </div>
     </div>
 
-    {{/each}}
 </div>
+</div>
+
+<style>
+    .center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .width {
+        width: 90vw;
+        margin-top: 50px;
+    }
+</style>

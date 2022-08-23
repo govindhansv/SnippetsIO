@@ -13,23 +13,16 @@
 			<textarea rows="8" id="description" name="desc" placeholder="Description..."
 				class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50">{{data.desc}}</textarea>
 
-			<label for="Frontend" class="block text-gray-600">Frontend</label>
-			<textarea rows="8" id="Frontend" name="frontend" placeholder="Frontend..."
-				class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50">{{data.frontend}}</textarea>
+			<label for="code" class="block text-gray-600">Code</label>
+			<textarea id="WPComment" rows="8" id="code" name="code" placeholder="Code..."
+				class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50">{{data.code}}</textarea>
 
-			<label for="Backend" class="block text-gray-600">Backend</label>
-			<textarea rows="8" id="Backend" name="backend" placeholder="Backend..."
-				class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50">{{data.backend}}</textarea>
 
-			<label for="Database Schema" class="block text-gray-600">Database Schema</label>
-			<textarea rows="8" name="schema" id="Database Schema" placeholder="Database Schema..."
-				class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50">{{data.schema}}</textarea>
+			<label class="block text-gray-900 font-bold">Preview</label>
+			<div class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50 flex items-center justify-center" id="prevCom"></div>
 
-			<label for="Linking" class="block text-gray-600">Linking</label>
-			<textarea rows="8" name="linking" id="Linking" placeholder="Linking..."
-				class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50">{{data.linking}}</textarea>
-
-			<button type="submit" class="py-4 my-8 font-semibold rounded-md text-gray-50 bg-violet-600">Edit Code</button>
+			<button type="submit" class="py-4 my-8 font-semibold rounded-md text-gray-50 bg-violet-600">Edit
+				Code</button>
 		</div>
 
 	</form>
@@ -37,3 +30,16 @@
 
 </form>
 </div>
+
+
+<script>
+	var wpcomment = document.getElementById('WPComment');
+
+	function pre() {
+		document.getElementById('prevCom').innerHTML = wpcomment.value;
+	}
+pre()
+	wpcomment.onkeyup = wpcomment.onkeypress = function() {
+		document.getElementById('prevCom').innerHTML = this.value;
+	}
+</script>

@@ -1,38 +1,70 @@
-{{!-- <div>
-
-    <div class="admin w-90 h-100 mx-10">
-
-        <div class="head my-2 flex border border-black rounded m-3 h-full p-3 items-center justify-center w-64">
-            <a href="snippet/{{this._id}}">{{this.name}}</a>
-        </div>
-
+<div id="alert-2" class="fixed bottom-10 flex px-24 p-4 bg-red-100 rounded-lg dark:bg-red-200 h-12" role="alert">
+    <span class="sr-only">Info</span>
+    <div class="ml-3 text-sm font-medium text-red-700 dark:text-red-800">
+        Deleted
     </div>
-    <div class="buttons">
-        <a class="ml-5" href="/editpost/{{this._id}}">Edit</a>
-        <a class="ml-5" href="/deletepost/{{this._id}}">Delete</a>
-    </div>
-</div> --}}
+</div>
+
+<style>
+    #alert-2 {
+        display: none;
+        z-index: 999;
+    }
+</style>
+
+<script>
+    function show() {
+        document.getElementById('alert-2').style.display = 'block';
+        setTimeout(() => {
+            document.getElementById('alert-2').style.display = 'none';
+        }, 3000);
+    }
+</script>
 
 <div class="center">
     <div class="width">
         {{#each data}}
-        <div
-            class="mb-8 block p-6 bg-grey-100 rounded-lg border border-gray-200 shadow-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <div class="flex">
-                <h5 class="m-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{this.name}}</h5>
-                <a href="/editpost/{{this._id}}" onclick="CopyToClipboard('linking');return false;"
-                    class=" m-3 rounded inline-flex group items-center justify-center px-2 py-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white">
-                    <span class="w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full"></span>
-                    <span class="">Edit</span>
-                </a>
-                <a href="/deletepost/{{this._id}}" onclick="CopyToClipboard('linking');return false;"
-                    class=" m-3 rounded inline-flex group items-center justify-center px-2 py-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white">
-                    <span class="w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full"></span>
-                    <span class="">Delete</span>
-                </a>
+        <a href="snippet/{{this._id}}" class="w-full h-full">
+            <div
+                class="mb-8 block p-6 bg-grey-100 rounded-lg border border-gray-200 shadow-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <div class="flex">
+                    <h5 class="m-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{this.name}}</h5>
+                    <a href="/editpost/{{this._id}}" onclick="CopyToClipboard('linking');return false;"
+                        class=" m-3 rounded inline-flex group items-center justify-center px-2 py-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white">
+                        <span class="w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full"></span>
+                        <span class="">Edit</span>
+                    </a>
+                    <a href="/deletepost/{{this._id}}" onclick="CopyToClipboard('linking');return false;"
+                        class=" m-3 rounded inline-flex group items-center justify-center px-2 py-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white">
+                        <span class="w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full"></span>
+                        <span onclick="show()" class="">Delete</span>
+                    </a>
+                </div>
+                <p id="linking" class="mt-4 font-normal text-gray-700 dark:text-gray-400">{{this.desc}}</p>
             </div>
-            <p id="linking" class="mt-4 font-normal text-gray-700 dark:text-gray-400">{{this.desc}}</p>
-        </div>
+        </a>
+        {{/each}}
+
+        {{#each codedata}}
+        <a href="code/{{this._id}}" class="w-full h-full">
+            <div
+                class="mb-8 block p-6 bg-grey-100 rounded-lg border border-gray-200 shadow-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <div class="flex">
+                    <h5 class="m-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{this.name}}</h5>
+                    <a href="/editcode/{{this._id}}" onclick="CopyToClipboard('linking');return false;"
+                        class=" m-3 rounded inline-flex group items-center justify-center px-2 py-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white">
+                        <span class="w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full"></span>
+                        <span class="">Edit</span>
+                    </a>
+                    <a href="/deletecode/{{this._id}}" onclick="CopyToClipboard('linking');return false;"
+                        class=" m-3 rounded inline-flex group items-center justify-center px-2 py-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white">
+                        <span class="w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full"></span>
+                        <span onclick="show()" class="">Delete</span>
+                    </a>
+                </div>
+                <p id="linking" class="mt-4 font-normal text-gray-700 dark:text-gray-400">{{this.desc}}</p>
+            </div>
+        </a>
         {{/each}}
     </div>
 </div>

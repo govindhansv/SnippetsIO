@@ -1,6 +1,6 @@
-<div id="alert-2" class="fixed bottom-10 flex px-24 p-4 bg-red-100 rounded-lg dark:bg-red-200 h-12" role="alert">
+<div id="alert-2" class="fixed bottom-10 flex px-24 p-4 bg-green-100 rounded-lg dark:bg-red-200 h-12" role="alert">
     <span class="sr-only">Info</span>
-    <div class="ml-3 text-sm font-medium text-red-700 dark:text-red-800">
+    <div class="ml-3 text-sm font-medium text-green-700 dark:text-red-800">
         Copied to clipboard
     </div>
 </div>
@@ -52,68 +52,27 @@
             <div
                 class="b-8 block p-6 bg-grey-100 rounded-lg border border-gray-200 shadow-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <div class="flex">
-                    <h5 class="m-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Frontend</h5>
-                    <a href="" onclick="CopyToClipboard('frontend');return false;"
+                    <h5 class="m-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Code</h5>
+                    <a onclick="CopyToClipboard('code-block');return false;"
                         class=" m-3 rounded inline-flex group items-center justify-center px-2 py-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white">
                         <span class="w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full"></span>
                         <span class="">Copy</span>
                     </a>
                 </div>
-                <p id="frontend" class="mt-4 font-normal text-gray-700 dark:text-gray-400">{{data.frontend}}</p>
+
+                <p id="code-block" class="mt-4 font-normal text-gray-700 dark:text-gray-400">{{data.code}}</p>
+
+                <label class="mt-5 block text-gray-900 font-bold">Preview</label>
+                <div class="my-3  p-4 rounded-md resize-none text-gray-800 bg-gray-50"
+                    id="prevCom"></div>
+
+                <textarea id="WPComment" rows="10" id="code" name="code" placeholder="Paste Code..."
+                    class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50" hidden>{{data.code}}</textarea>
+
             </div>
         </div>
     </div>
 
-    <div class="center">
-        <div class="width">
-            <div
-                class="b-8 block p-6 bg-grey-100 rounded-lg border border-gray-200 shadow-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <div class="flex">
-                    <h5 class="m-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Backend</h5>
-                    <a href="" onclick="CopyToClipboard('backend');return false;"
-                        class=" m-3 rounded inline-flex group items-center justify-center px-2 py-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white">
-                        <span class="w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full"></span>
-                        <span class="">Copy</span>
-                    </a>
-                </div>
-                <p id="backend" class="mt-4 font-normal text-gray-700 dark:text-gray-400">{{data.backend}}</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="center">
-        <div class="width">
-            <div
-                class="b-8 block p-6 bg-grey-100 rounded-lg border border-gray-200 shadow-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <div class="flex">
-                    <h5 class="m-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Database</h5>
-                    <a href="" onclick="CopyToClipboard('schema');return false;"
-                        class=" m-3 rounded inline-flex group items-center justify-center px-2 py-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white">
-                        <span class="w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full"></span>
-                        <span class="">Copy</span>
-                    </a>
-                </div>
-                <p id="schema" class="mt-4 font-normal text-gray-700 dark:text-gray-400">{{data.schema}}</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="center">
-        <div class="width">
-            <div
-                class="b-8 block p-6 bg-grey-100 rounded-lg border border-gray-200 shadow-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <div class="flex">
-                    <h5 class="m-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Linking</h5>
-                    <a href="" onclick="CopyToClipboard('linking');return false;"
-                        class=" m-3 rounded inline-flex group items-center justify-center px-2 py-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white">
-                        <span class="w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full"></span>
-                        <span class="">Copy</span>
-                    </a>
-                </div>
-                <p id="linking" class="mt-4 font-normal text-gray-700 dark:text-gray-400">{{data.linking}}</p>
-            </div>
-        </div>
-    </div>
 
     <style>
         .center {
@@ -129,3 +88,15 @@
             width: 90vw;
         }
     </style>
+
+    <script>
+        var wpcomment = document.getElementById('WPComment');
+
+        function pre() {
+            document.getElementById('prevCom').innerHTML = wpcomment.value;
+        }
+        pre()
+        wpcomment.onkeyup = wpcomment.onkeypress = function () {
+            document.getElementById('prevCom').innerHTML = this.value;
+        }
+    </script>

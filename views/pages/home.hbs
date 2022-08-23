@@ -2,6 +2,10 @@
     {{>searchbar}}
     <div class="center">
         <div class="width">
+{{#if err}}
+<h1>No data </h1>
+{{/if}}
+
             {{#each data}}
             <a href="/snippet/{{this._id}}"
                 class=" mb-8 block p-6 bg-grey-100 rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -9,6 +13,17 @@
                     {{this.name}}</h5>
                 <p class="font-normal text-gray-700 dark:text-gray-400">{{this.desc}}</p>
             </a>
+            {{/each}}
+            {{#each codedata}}
+            <a href="/code/{{this._id}}"
+                class=" mb-8 block p-6 bg-grey-100 rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    {{this.name}}</h5>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{{this.desc}}</p>
+            </a>
+
+           
+
             {{/each}}
         </div>
     </div>
@@ -29,3 +44,4 @@
         margin-top: 50px;
     }
 </style>
+

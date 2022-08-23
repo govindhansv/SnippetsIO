@@ -9,7 +9,7 @@ const copy = require('clipboard-copy')
 /* GET home page. */
 
 router.get('/docs', async function (req, res) {
-    res.render('pages/docs');
+  res.render('pages/docs');
 });
 
 // router.get('/', async function (req, res) {
@@ -23,13 +23,20 @@ router.get('/docs', async function (req, res) {
 // });
 
 router.get('/', async function (req, res) {
-  let data = await db.get().collection('data').find().toArray()
-  res.render('pages/home',{data});
+  let data = await db.get().collection('data').find({ type: 'snippet' }).toArray()
+  let codedata = await db.get().collection('data').find({ type: 'code' }).toArray()
+  let err = true;
+  if (data.length !=0 || codedata.length !=0) {
+    err=false;
+  }
+  res.render('pages/home', { data, codedata,err });
 });
 
 router.get('/admin', async function (req, res) {
-  let data = await db.get().collection('data').find().toArray()
-  res.render('pages/admin',{data});
+  let data = await db.get().collection('data').find({ type: 'snippet' }).toArray()
+  let codedata = await db.get().collection('data').find({ type: 'code' }).toArray()
+ 
+  res.render('pages/admin', { data, codedata });
 });
 
 router.get("/about", (req, res) => {
@@ -49,19 +56,19 @@ router.get('/addpost', async function (req, res) {
 router.post('/addpost', async function (req, res) {
   let data = req.body
   await db.get().collection('data').insertOne(data)
-  res.render('pages/snippet',{data})
+  res.render('pages/snippet', { data })
 });
 
 router.get('/editpost/:id', async function (req, res) {
   let id = req.params.id
   let data = await db.get().collection('data').findOne({ _id: ObjectId(id) })
-  res.render('forms/editpost',{data});
+  res.render('forms/editpost', { data });
 });
 
 router.post('/editpost', async function (req, res) {
   let newdata = req.body
   let query = { _id: ObjectId(req.body.id) }
-  var newvalues = { $set: { name: newdata.name , desc:newdata.desc, backend:newdata.backend, frontend:newdata.frontend , schema:newdata.schema , linking:newdata.linking}};
+  var newvalues = { $set: { name: newdata.name, desc: newdata.desc, backend: newdata.backend, frontend: newdata.frontend, schema: newdata.schema, linking: newdata.linking } };
   await db.get().collection('data').updateOne(query, newvalues)
   res.redirect(`/snippet/${req.body.id}`)
 });
@@ -75,7 +82,7 @@ router.get('/deletepost/:id', async function (req, res) {
 router.get('/snippet/:id', async function (req, res) {
   let id = req.params.id
   let data = await db.get().collection('data').findOne({ _id: ObjectId(id) })
-  res.render('pages/snippet',{data});
+  res.render('pages/snippet', { data });
 });
 
 
@@ -88,20 +95,43 @@ router.get('/addcode', async function (req, res) {
 
 router.post('/addcode', async function (req, res) {
   let data = req.body
+  console.log(data);
   await db.get().collection('data').insertOne(data)
-  res.render('pages/snippet',{data})
+  res.render('pages/code', { data })
 });
 
 router.get('/editcode/:id', async function (req, res) {
   let id = req.params.id
   let data = await db.get().collection('data').findOne({ _id: ObjectId(id) })
-  res.render('forms/editcode',{data});
+  res.render('forms/editcode', { data });
+});
+router.post('/search', async function (req, res) {
+  let query = req.body.query;
+  // query = "/"+query+"/"
+  let data = await db.get().collection('data').find({
+    $or: [
+      { name: { $regex: query } }, { desc: { $regex: query } }
+    ]
+  }
+  ).sort().toArray()
+  let codedata = await db.get().collection('data').find({
+    $or: [
+      { name: { $regex: query } }, { desc: { $regex: query } }
+    ]
+  }).sort({"name":1}).toArray()
+
+  let err = true;
+  if (data.length !=0 || codedata.length !=0) {
+    err=false;
+  }
+
+  res.render('pages/home', { data, codedata,err });
 });
 
 router.post('/editcode', async function (req, res) {
   let newdata = req.body
   let query = { _id: ObjectId(req.body.id) }
-  var newvalues = { $set: { name: newdata.name , desc:newdata.desc, backend:newdata.backend, frontend:newdata.frontend , schema:newdata.schema , linking:newdata.linking}};
+  var newvalues = { $set: { name: newdata.name, desc: newdata.desc, backend: newdata.code } };
   await db.get().collection('data').updateOne(query, newvalues)
   res.redirect(`/code/${req.body.id}`)
 });
@@ -115,11 +145,8 @@ router.get('/deletecode/:id', async function (req, res) {
 router.get('/code/:id', async function (req, res) {
   let id = req.params.id
   let data = await db.get().collection('data').findOne({ _id: ObjectId(id) })
-  res.render('pages/code',{data});
+  res.render('pages/code', { data });
 });
-
-
-
 
 
 

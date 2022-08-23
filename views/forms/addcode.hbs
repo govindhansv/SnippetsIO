@@ -1,29 +1,41 @@
 <div class="w-full p-8 mb-16 space-y-3 rounded-xl bg-white text-gray-800">
-	<h1 class="text-2xl font-bold text-center">Add Snippet</h1>
-	<form action="/addpost" method="post" class="space-y-6 ng-untouched ng-pristine ng-valid">
-		
+	<h1 class="text-2xl font-bold text-center">Add Code</h1>
+	<form action="/addcode" method="post" class="space-y-6 ng-untouched ng-pristine ng-valid">
+
 		<div class="flex flex-col w-full">
- 
-			<label for="name" class="block text-gray-900 font-bold">Function</label>
-			<input type="text" name="name" id="name" placeholder="Name" class="my-5 w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600">
+			<input type="text" name="type" value="code" hidden>
+			<label for="name" class="block text-gray-900 font-bold">Code</label>
+			<input type="text" name="name" id="name" placeholder="Name"
+				class="my-5 w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600">
 
 			<label for="desc" class="block text-gray-900 font-bold">Description</label>
-			<textarea rows="4" id="desc" name="desc" placeholder="Description..." class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50"></textarea>
+			<textarea rows="2" id="desc" name="desc" placeholder="Description..."
+				class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50"></textarea>
 
-			<label for="Frontend" class="block text-gray-900 font-bold">Frontend</label>
-			<textarea rows="10" id="Frontend" name="frontend" placeholder="Frontend..." class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50"></textarea>
+			<label for="code" class="block text-gray-900 font-bold">Code</label>
+			<textarea id="WPComment" rows="10" id="code" name="code" placeholder="Paste Code..."
+				class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50"></textarea>
 
-			<label for="Backend" class="block text-gray-900 font-bold">Backend</label>
-			<textarea rows="10" id="Backend" name="backend" placeholder="Backend..." class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50"></textarea>
+			<label class="block text-gray-900 font-bold">Preview</label>
+			<div class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50 flex items-center justify-center" id="prevCom"></div>
 
-			<label for="Database Schema" class="block text-gray-900 font-bold">Database Schema</label>
-			<textarea rows="10" name="schema" id="Database Schema" placeholder="Database Schema..." class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50"></textarea>
-
-			<label for="Linking" class="block text-gray-900 font-bold">Linking</label>
-			<textarea rows="10" name="linking" id="Linking" placeholder="Linking..." class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50"></textarea>
-
-			<button type="submit" class="py-4 my-8 font-semibold rounded-md text-gray-50 bg-violet-600">Add Post</button>
+			<button type="submit" class="py-4 my-8 font-semibold rounded-md text-gray-50 bg-violet-600">Add
+				Post</button>
 		</div>
 
 	</form>
 </div>
+
+
+
+<script>
+	var wpcomment = document.getElementById('WPComment');
+
+	function pre() {
+		document.getElementById('prevCom').innerHTML = wpcomment.value;
+	}
+	pre()
+	wpcomment.onkeyup = wpcomment.onkeypress = function () {
+		document.getElementById('prevCom').innerHTML = this.value;
+	}
+</script>

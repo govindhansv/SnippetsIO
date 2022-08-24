@@ -162,18 +162,19 @@ router.post('/search', async function (req, res) {
 
 
 router.get('/editdoc/:id', async function (req, res) {
+  let codedata = await db.get().collection('data').find({ type: 'code' }).toArray()
   let id = req.params.id
   let data = await db.get().collection('data').findOne({ _id: ObjectId(id) })
-  res.render('forms/editdoc', { data });
+  res.render('forms/editdoc', { data ,codedata});
 });
 
 
 router.post('/editdoc', async function (req, res) {
   let newdata = req.body
   let query = { _id: ObjectId(req.body.id) }
-  var newvalues = { $set: { name: newdata.name, desc: newdata.desc, backend: newdata.code } };
+  var newvalues = { $set: { name: newdata.name, desc: newdata.desc, code: newdata.code } };
   await db.get().collection('data').updateOne(query, newvalues)
-  res.redirect(`/code/${req.body.id}`)
+  res.redirect(`/docs/${req.body.id}`)
 });
 
 router.get('/deletedoc/:id', async function (req, res) {

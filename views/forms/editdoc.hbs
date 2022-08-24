@@ -19,19 +19,20 @@
         <form action="/editdoc" method="post" class="space-y-6 ng-untouched ng-pristine ng-valid">
 
             <div class="docs-form  flex flex-col w-full">
+			<input type="text" name="id" value={{data._id}} hidden>
 
                 <label for="name" class="block text-gray-900 font-bold">Docs Name</label>
-                <input type="text" name="name" id="name" placeholder="Name"
+                <input type="text" name="name" id="name" placeholder="Name" value="{{data.name}}"
                     class="my-5 w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600">
 
                 <label for="desc" class="block text-gray-900 font-bold">Description</label>
-                <textarea rows="4" id="desc" name="desc" placeholder="Description..."
-                    class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50"></textarea>
+                <textarea rows="4" id="desc" name="desc" placeholder="Description..." 
+                    class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50">{{data.desc}}</textarea>
 
                 <label for="code" class="block text-gray-900 font-bold">Code</label>
                 <textarea id="WPComment" onkeypress="onTestChange();" rows="10" id="code" name="code"
                     placeholder="Paste Code..."
-                    class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50"></textarea>
+                    class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50">{{data.code}}</textarea>
 
                 <label class="block text-gray-900 font-bold">Preview</label>
                 <div id="prevCom"></div>

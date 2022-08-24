@@ -23,7 +23,8 @@
 
 <div class="center">
     <div class="width">
-        <h1>Snippets</h1>
+			<label for="name" class="my-3 text-gray-900 font-bold text-3xl block ">Snippets</label>
+
         {{#each data}}
         <a href="snippet/{{this._id}}" class="w-full h-full">
             <div
@@ -45,7 +46,7 @@
             </div>
         </a>
         {{/each}}
-        <h1>Codes design</h1>
+			<label for="name" class="my-3 text-gray-900 font-bold text-3xl block ">Codes design</label>
 
         {{#each codedata}}
         <a href="code/{{this._id}}" class="w-full h-full">
@@ -68,7 +69,8 @@
             </div>
         </a>
         {{/each}}
-        <h1>Docs</h1>
+
+			<label for="name" class="my-3 text-gray-900 font-bold text-3xl block ">Docs</label>
 
         {{#each docsdata}}
         <a href="code/{{this._id}}" class="w-full h-full">

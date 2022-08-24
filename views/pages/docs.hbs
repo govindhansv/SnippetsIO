@@ -1,83 +1,36 @@
 <div>
-    <div class=''>
+    {{>searchbar}}
+    <div class="center">
+        <div id="parent" class="width">
+            {{#if err}}
+            <h1>No data </h1>
+            {{/if}}
 
-        <div><br /></div>
-        <center>
-            <h1 class="text-4xl"><b>How to build base application using MERN stack</b></h1>
-        </center>
-        <br>
-        <br>
-        <h4 class=''><b>Environment Setup for Backend</b></h4>
-        <br>
-        <code class=''>npm init -y</code>
-        <br>
-        <br>
-        <small class=''>This command will create a package.json file for us, from where we will be able to
-            manage our installed packages and also control the version of our application.</small>
-        <br>
-        <br>
-
-        <code class='code'>npm install express mongoose cors nodemon</code>
-        <br>
-        <br>
-        <small class=''>Here, with the help of this command, we will be able to install both at a single time.
-            The express will use to write NodeJS code and set up endpoints and Mongoose will be used to create a
-            database model and save data. The CORS is referred to as Cross-Origin-Resource-Sharing which will help us to
-            build a connection with the frontend. The nodemon help to restart our server after everychange</small>
-        <br> <br>
-
-        <h4 class=''>Create Node Server</h4>
-        <br>
-        <script class="gists" src="https://gist.github.com/gokulhans/f9d9acfa67663dda92a9ff36c1793325.js"></script>
-        <br>
-        <h4 class=''>Connect MongoDB Database</h4>
-        <br>
-        <script class="gists" src="https://gist.github.com/gokulhans/6b4aa66a16d8b7e575a17e07665d7f2b.js"></script>
-        <small class=''>After connecting the MongoDB database, it is time to create our database schema model.
-            That will give the shape of the data and define how the data will be stored in the database. We will create
-            it into a separate folder and will name it Model and inside the model folder, we will create a folder named
-            PhoneBook.js Inside this folder, we will create a simple database schema model. See the below code
-            example:</small>
-        <br><br>
-        <h4 class=''>Create Mongoose model</h4>
-        <br>
-
-        <script class="gists" src="https://gist.github.com/gokulhans/d409a440b77f4eed74ebfd604c0c34ab.js"></script>
-        <small class=''>Here, you can see that we have created a schema model where we will store two types of
-            data. One is the name which type is String and another one is the phone which type is Number We also set
-            them as required: true as a result, it will throw a mongo error if any fields remain empty. Finally, we have
-            exported this schema model so that we can use it by importing it into another file.</small>
-        <br>
-        <br>
-        <h4 class=''><b>Environment setup for Frontend</b></h4>
-        <br>
-        <code class="">npx create-react-app client</code>
-        <code class="">cd client</code>
-        <code class="">npm start</code>
-
-        <br><br>
-
-        <small class=''>We have successfully completed our BASE application using the MERN stack. In this whole
-            tutorial, we have covered, how you can start a nodejs server and connect it with mongoose.And how to start
-            react server. If you have completed this tutorial, now you are ready to build your own CRUD application that
-            will be based on the MERN stack. But there are a lot more things to do. Reffer below</small>
-        {{!--
-        <Link as={Link} to="/codegen">click here</Link> --}}
-        <br><br>
-        <br><br>
-
-
+            {{#each data}}
+            <a href="/docs/{{this._id}}"
+                class="searchitem mb-8 block p-6 bg-grey-100 rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    {{this.name}}</h5>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{{this.desc}}</p>
+            </a>
+            {{/each}}
+            
+        </div>
     </div>
+
+</div>
 </div>
 
 <style>
-    .gist {
-        max-width: 90vw;
-        overflow: auto;
+    .center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
-    .gist .blob-wrapper.data {
-        max-height: 500px;
-        overflow: auto;
+    .width {
+        width: 90vw;
+        margin-top: 50px;
     }
 </style>

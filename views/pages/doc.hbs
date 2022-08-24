@@ -1,0 +1,28 @@
+<div class="center">
+
+<div id="prevCom"></div>
+
+<textarea id="WPComment" hidden>{{data.code}}</textarea>
+</div>
+
+<style>
+      .center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+</style>
+
+<script>
+    var wpcomment = document.getElementById('WPComment');
+
+    function pre() {
+        document.getElementById('prevCom').innerHTML = wpcomment.value;
+    }
+    pre()
+    wpcomment.onkeyup = wpcomment.onkeypress = function () {
+        document.getElementById('prevCom').innerHTML = this.value;
+    }
+</script>

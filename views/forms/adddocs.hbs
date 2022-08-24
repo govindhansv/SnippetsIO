@@ -1,0 +1,163 @@
+<div id="alert-2" class="fixed bottom-10 flex px-24 p-4 bg-green-100 rounded-lg dark:bg-red-200 h-12" role="alert">
+    <span class="sr-only">Info</span>
+    <div class="ml-3 text-sm font-medium text-green-700 dark:text-red-800">
+        Copied to clipboard
+    </div>
+</div>
+
+<style>
+    #alert-2 {
+        display: none;
+        z-index: 999;
+    }
+</style>
+
+<section class="docs-section">
+
+    <div>
+
+        <form action="/adddocs" method="post" class="space-y-6 ng-untouched ng-pristine ng-valid">
+
+            <div class="docs-form  flex flex-col w-full">
+
+                <label for="name" class="block text-gray-900 font-bold">Docs Name</label>
+                <input type="text" name="name" id="name" placeholder="Name"
+                    class="my-5 w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600">
+
+                <label for="desc" class="block text-gray-900 font-bold">Description</label>
+                <textarea rows="4" id="desc" name="desc" placeholder="Description..."
+                    class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50"></textarea>
+
+                <label for="code" class="block text-gray-900 font-bold">Code</label>
+                <textarea id="WPComment" onkeypress="onTestChange();" rows="10" id="code" name="code"
+                    placeholder="Paste Code..."
+                    class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50"></textarea>
+
+                <label class="block text-gray-900 font-bold">Preview</label>
+                <div id="prevCom"></div>
+
+                <button type="submit" class="py-4 my-8 font-semibold rounded-md text-gray-50 bg-violet-600">Add
+                    Post</button>
+
+            </div>
+        </form>
+
+
+        <script>
+
+            var wpcomment = document.getElementById('WPComment');
+
+            function pre() {
+                document.getElementById('prevCom').innerHTML = wpcomment.value;
+            }
+            pre()
+            wpcomment.onkeyup = wpcomment.onkeypress = function () {
+                document.getElementById('prevCom').innerHTML = this.value;
+            }
+
+            function CopyToClipboard(id) {
+                var r = document.createRange();
+                r.selectNode(document.getElementById(id));
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(r);
+                document.execCommand('copy');
+                window.getSelection().removeAllRanges();
+                show()
+            }
+
+        </script>
+
+
+    </div>
+
+
+    <div>
+
+        {{>searchbar}}
+
+        <div class="center">
+            <div id="parent" class="width">
+                {{#if err}}
+                <h1>No data </h1>
+                {{/if}}
+
+                {{#each codedata}}
+                <div
+                    class="searchitem mb-8 block p-6 bg-grey-100 rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        {{this.name}}</h5>
+                    <p class="font-normal text-gray-700 dark:text-gray-400">{{this.desc}}</p>
+
+                    <textarea id="{{this._id}}"
+                        class="w-0 h-0 font-normal text-gray-700 dark:text-gray-400">{{this.code}}</textarea>
+
+                    <button onclick=CopyToClipboard("{{this._id}}")
+                        class=" m-3 rounded inline-flex group items-center justify-center px-2 py-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white">
+
+                        <span class="w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full"></span>
+                        <span class="">Copy</span>
+
+                    </button>
+
+                    <div class="my-3  p-4 rounded-md resize-none text-gray-800 bg-gray-50" id="{{this.name}}"></div>
+
+                    {{!-- <textarea id="{{this._id}}" rows="10" id="code" name="code" placeholder="Paste Code..."
+                        class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50" hidden>{{this.code}}</textarea> --}}
+                    </a>
+
+                </div>
+                <script>
+                    document.getElementById("{{this.name}}").innerHTML = document.getElementById("{{this._id}}").value;
+                </script>
+
+
+                {{/each}}
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+</section>
+
+<style>
+    #prevCom {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .docs-section {
+        display: flex;
+    }
+
+    .docs-form {
+        width: 40vw;
+        margin-right: 50px;
+    }
+
+    .width {
+        width: 40vw;
+        margin-top: 50px;
+    }
+</style>
+
+
+
+
+
+<script>
+    function show() {
+        document.getElementById('alert-2').style.display = 'block';
+        setTimeout(() => {
+            document.getElementById('alert-2').style.display = 'none';
+
+        }, 5000);
+    }
+</script>

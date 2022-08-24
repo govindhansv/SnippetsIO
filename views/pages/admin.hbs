@@ -23,6 +23,7 @@
 
 <div class="center">
     <div class="width">
+        <h1>Snippets</h1>
         {{#each data}}
         <a href="snippet/{{this._id}}" class="w-full h-full">
             <div
@@ -44,6 +45,7 @@
             </div>
         </a>
         {{/each}}
+        <h1>Codes design</h1>
 
         {{#each codedata}}
         <a href="code/{{this._id}}" class="w-full h-full">
@@ -57,6 +59,29 @@
                         <span class="">Edit</span>
                     </a>
                     <a href="/deletecode/{{this._id}}" onclick="CopyToClipboard('linking');return false;"
+                        class=" m-3 rounded inline-flex group items-center justify-center px-2 py-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white">
+                        <span class="w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full"></span>
+                        <span onclick="show()" class="">Delete</span>
+                    </a>
+                </div>
+                <p id="linking" class="mt-4 font-normal text-gray-700 dark:text-gray-400">{{this.desc}}</p>
+            </div>
+        </a>
+        {{/each}}
+        <h1>Docs</h1>
+
+        {{#each docsdata}}
+        <a href="code/{{this._id}}" class="w-full h-full">
+            <div
+                class="mb-8 block p-6 bg-grey-100 rounded-lg border border-gray-200 shadow-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <div class="flex">
+                    <h5 class="m-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{this.name}}</h5>
+                    <a href="/editdoc/{{this._id}}" onclick="CopyToClipboard('linking');return false;"
+                        class=" m-3 rounded inline-flex group items-center justify-center px-2 py-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white">
+                        <span class="w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full"></span>
+                        <span class="">Edit</span>
+                    </a>
+                    <a href="/deletedoc/{{this._id}}" onclick="CopyToClipboard('linking');return false;"
                         class=" m-3 rounded inline-flex group items-center justify-center px-2 py-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white">
                         <span class="w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full"></span>
                         <span onclick="show()" class="">Delete</span>

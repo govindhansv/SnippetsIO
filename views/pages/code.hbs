@@ -59,12 +59,14 @@
                         <span class="">Copy</span>
                     </a>
                 </div>
+                <pre>
 
-                <p id="code-block" class="mt-4 font-normal text-gray-700 dark:text-gray-400">{{data.code}}</p>
+                <code id="code-block" class=" text-start mt-4 font-normal text-gray-700 dark:text-gray-400">{{data.code}}</code>
+                </pre>
 
-                <label class="mt-5 block text-gray-900 font-bold">Preview</label>
-                <div class="my-3  p-4 rounded-md resize-none text-gray-800 bg-gray-50"
-                    id="prevCom"></div>
+
+                <label class="mt-5 block text-gray-900 font-bold ">Preview</label>
+                <div class="my-3  p-4 rounded-md resize-none text-gray-800 bg-gray-50" id="prevCom"></div>
 
                 <textarea id="WPComment" rows="10" id="code" name="code" placeholder="Paste Code..."
                     class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50" hidden>{{data.code}}</textarea>
@@ -86,6 +88,13 @@
 
         .width {
             width: 90vw;
+        }
+
+        pre,
+        code {
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            word-break: break-word;
         }
     </style>
 

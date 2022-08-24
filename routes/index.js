@@ -8,10 +8,6 @@ const copy = require('clipboard-copy')
 
 /* GET home page. */
 
-router.get('/docs', async function (req, res) {
-  res.render('pages/docs');
-});
-
 // router.get('/', async function (req, res) {
 //   req.session.url = req.route.path
 //   let data = await db.get().collection('data').find({ "item": "courses" }).toArray()
@@ -26,17 +22,24 @@ router.get('/', async function (req, res) {
   let data = await db.get().collection('data').find({ type: 'snippet' }).toArray()
   let codedata = await db.get().collection('data').find({ type: 'code' }).toArray()
   let err = true;
-  if (data.length !=0 || codedata.length !=0) {
-    err=false;
+  if (data.length != 0 || codedata.length != 0) {
+    err = false;
   }
-  res.render('pages/home', { data, codedata,err });
+  res.render('pages/home', { data, codedata, err });
 });
+router.get('/blog', async function (req, res) {
+
+  res.render('pages/medium');
+});
+
+
 
 router.get('/admin', async function (req, res) {
   let data = await db.get().collection('data').find({ type: 'snippet' }).toArray()
   let codedata = await db.get().collection('data').find({ type: 'code' }).toArray()
- 
-  res.render('pages/admin', { data, codedata });
+  let docsdata = await db.get().collection('data').find({ type: 'doc' }).toArray()
+
+  res.render('pages/admin', { data, codedata, docsdata });
 });
 
 router.get("/about", (req, res) => {
@@ -89,6 +92,7 @@ router.get('/snippet/:id', async function (req, res) {
 
 
 
+
 router.get('/addcode', async function (req, res) {
   res.render('forms/addcode');
 });
@@ -105,28 +109,7 @@ router.get('/editcode/:id', async function (req, res) {
   let data = await db.get().collection('data').findOne({ _id: ObjectId(id) })
   res.render('forms/editcode', { data });
 });
-router.post('/search', async function (req, res) {
-  let query = req.body.query;
-  // query = "/"+query+"/"
-  let data = await db.get().collection('data').find({
-    $or: [
-      { name: { $regex: query } }, { desc: { $regex: query } }
-    ]
-  }
-  ).sort().toArray()
-  let codedata = await db.get().collection('data').find({
-    $or: [
-      { name: { $regex: query } }, { desc: { $regex: query } }
-    ]
-  }).sort({"name":1}).toArray()
 
-  let err = true;
-  if (data.length !=0 || codedata.length !=0) {
-    err=false;
-  }
-
-  res.render('pages/home', { data, codedata,err });
-});
 
 router.post('/editcode', async function (req, res) {
   let newdata = req.body
@@ -150,6 +133,87 @@ router.get('/code/:id', async function (req, res) {
 
 
 
+
+
+router.post('/search', async function (req, res) {
+  let query = req.body.query;
+  // query = "/"+query+"/"
+  let data = await db.get().collection('data').find({
+    $or: [
+      { name: { $regex: query } }, { desc: { $regex: query } }
+    ]
+  }
+  ).sort().toArray()
+  let codedata = await db.get().collection('data').find({
+    $or: [
+      { name: { $regex: query } }, { desc: { $regex: query } }
+    ]
+  }).sort({ "name": 1 }).toArray()
+
+  let err = true;
+  if (data.length != 0 || codedata.length != 0) {
+    err = false;
+  }
+
+  res.render('pages/home', { data, codedata, err });
+});
+
+
+
+
+router.get('/editdoc/:id', async function (req, res) {
+  let id = req.params.id
+  let data = await db.get().collection('data').findOne({ _id: ObjectId(id) })
+  res.render('forms/editdoc', { data });
+});
+
+
+router.post('/editdoc', async function (req, res) {
+  let newdata = req.body
+  let query = { _id: ObjectId(req.body.id) }
+  var newvalues = { $set: { name: newdata.name, desc: newdata.desc, backend: newdata.code } };
+  await db.get().collection('data').updateOne(query, newvalues)
+  res.redirect(`/code/${req.body.id}`)
+});
+
+router.get('/deletedoc/:id', async function (req, res) {
+  let id = req.params.id
+  await db.get().collection('data').deleteOne({ _id: ObjectId(id) })
+  res.redirect('back')
+});
+
+router.get('/docs/:id', async function (req, res) {
+  let id = req.params.id
+  let data = await db.get().collection('data').findOne({ _id: ObjectId(id) })
+  res.render('pages/doc', { data });
+});
+
+router.get('/docs', async function (req, res) {
+  let data = await db.get().collection('data').find({ type: "doc" }).toArray()
+  let err = true;
+  if (data.length != 0) {
+    err = false;
+  }
+  res.render('pages/docs', { data, err });
+});
+
+router.get('/adddocs', async function (req, res) {
+  let data = await db.get().collection('data').find({ type: 'snippet' }).toArray()
+  let codedata = await db.get().collection('data').find({ type: 'code' }).toArray()
+  let err = true;
+  if (data.length != 0 || codedata.length != 0) {
+    err = false;
+  }
+  res.render('forms/adddocs', { data, codedata, err });
+});
+
+router.post('/adddocs', async function (req, res) {
+  let data = req.body
+  data.type = 'doc';
+  console.log(req.body);
+  await db.get().collection('data').insertOne(data)
+  res.render('pages/doc', { data })
+});
 
 
 // router.get('/deletelist/:id', async function (req, res) {

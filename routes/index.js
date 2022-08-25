@@ -21,11 +21,12 @@ const copy = require('clipboard-copy')
 router.get('/', async function (req, res) {
   let data = await db.get().collection('data').find({ type: 'snippet' }).toArray()
   let codedata = await db.get().collection('data').find({ type: 'code' }).toArray()
+  let docsdata = await db.get().collection('data').find({ type: "doc" }).toArray()
   let err = true;
-  if (data.length != 0 || codedata.length != 0) {
+  if (data.length != 0 || codedata.length != 0 || docsdata.length !=0) {
     err = false;
   }
-  res.render('pages/home', { data, codedata, err });
+  res.render('pages/home', { data, codedata, err ,docsdata});
 });
 router.get('/blog', async function (req, res) {
 

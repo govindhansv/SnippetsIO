@@ -23,14 +23,14 @@
 
 <div class="center">
     <div class="width">
-			<label for="name" class="my-3 text-gray-900 font-bold text-3xl block ">Snippets</label>
+			<label for="name" class="my-8 text-gray-900 font-bold text-3xl block ">Snippets</label>
 
         {{#each data}}
         <a href="snippet/{{this._id}}" class="w-full h-full">
             <div
                 class="mb-8 block p-6 bg-grey-100 rounded-lg border border-gray-200 shadow-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <div class="flex">
-                    <h5 class="m-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{this.name}}</h5>
+                    <h5 class="my-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{this.name}}</h5>
                     <a href="/editpost/{{this._id}}" onclick="CopyToClipboard('linking');return false;"
                         class=" m-3 rounded inline-flex group items-center justify-center px-2 py-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white">
                         <span class="w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full"></span>
@@ -46,14 +46,14 @@
             </div>
         </a>
         {{/each}}
-			<label for="name" class="my-3 text-gray-900 font-bold text-3xl block ">Codes design</label>
+			<label for="name" class="my-8 text-gray-900 font-bold text-3xl block ">Codes design</label>
 
         {{#each codedata}}
         <a href="code/{{this._id}}" class="w-full h-full">
             <div
                 class="mb-8 block p-6 bg-grey-100 rounded-lg border border-gray-200 shadow-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <div class="flex">
-                    <h5 class="m-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{this.name}}</h5>
+                    <h5 class="my-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{this.name}}</h5>
                     <a href="/editcode/{{this._id}}" onclick="CopyToClipboard('linking');return false;"
                         class=" m-3 rounded inline-flex group items-center justify-center px-2 py-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white">
                         <span class="w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full"></span>
@@ -70,14 +70,14 @@
         </a>
         {{/each}}
 
-			<label for="name" class="my-3 text-gray-900 font-bold text-3xl block ">Docs</label>
+			<label for="name" class="my-8 text-gray-900 font-bold text-3xl block ">Docs</label>
 
         {{#each docsdata}}
         <a href="code/{{this._id}}" class="w-full h-full">
             <div
                 class="mb-8 block p-6 bg-grey-100 rounded-lg border border-gray-200 shadow-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <div class="flex">
-                    <h5 class="m-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{this.name}}</h5>
+                    <h5 class="my-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{this.name}}</h5>
                     <a href="/editdoc/{{this._id}}" onclick="CopyToClipboard('linking');return false;"
                         class=" m-3 rounded inline-flex group items-center justify-center px-2 py-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white">
                         <span class="w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full"></span>

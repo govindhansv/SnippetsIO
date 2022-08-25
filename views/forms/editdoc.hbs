@@ -14,19 +14,19 @@
 
 <section class="docs-section">
 
-    <div>
+    <div class="docdiv-1">
 
         <form action="/editdoc" method="post" class="space-y-6 ng-untouched ng-pristine ng-valid">
 
             <div class="docs-form  flex flex-col w-full">
-			<input type="text" name="id" value={{data._id}} hidden>
+                <input type="text" name="id" value={{data._id}} hidden>
 
                 <label for="name" class="block text-gray-900 font-bold">Docs Name</label>
                 <input type="text" name="name" id="name" placeholder="Name" value="{{data.name}}"
-                    class="my-5 w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600">
+                    class="my-5 w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50">
 
                 <label for="desc" class="block text-gray-900 font-bold">Description</label>
-                <textarea rows="4" id="desc" name="desc" placeholder="Description..." 
+                <textarea rows="4" id="desc" name="desc" placeholder="Description..."
                     class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50">{{data.desc}}</textarea>
 
                 <label for="code" class="block text-gray-900 font-bold">Code</label>
@@ -39,6 +39,7 @@
 
                 <button type="submit" class="py-4 my-8 font-semibold rounded-md text-gray-50 bg-violet-600">Add
                     Post</button>
+                <div class="h-64"></div>
 
             </div>
         </form>
@@ -74,10 +75,12 @@
 
     <div>
 
-        {{>searchbar}}
 
+        {{>searchbar}}
         <div class="center">
-            <div id="parent" class="width">
+            <div id="parent" class="docdiv-2 width">
+
+
                 {{#if err}}
                 <h1>No data </h1>
                 {{/if}}
@@ -103,7 +106,8 @@
                     <div class="my-3  p-4 rounded-md resize-none text-gray-800 bg-gray-50" id="{{this.name}}"></div>
 
                     {{!-- <textarea id="{{this._id}}" rows="10" id="code" name="code" placeholder="Paste Code..."
-                        class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50" hidden>{{this.code}}</textarea> --}}
+                        class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50" hidden>{{this.code}}</textarea>
+                    --}}
                     </a>
 
                 </div>
@@ -147,6 +151,39 @@
         width: 40vw;
         margin-top: 50px;
     }
+
+    .docdiv-1 {
+        overflow-y: scroll;
+        padding-left: 10px;
+        padding-right: 10px;
+        height: 100vh;
+                -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .docdiv-1::-webkit-scrollbar {
+        display: none;
+    }
+
+    .docdiv-2 {
+        overflow-y: scroll;
+        padding-left: 10px;
+        padding-right: 10px;
+        height: 100vh;
+                -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .docdiv-2::-webkit-scrollbar {
+        display: none;
+    }
+
 </style>
 
 

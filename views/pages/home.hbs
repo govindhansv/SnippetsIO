@@ -8,39 +8,79 @@
             {{#each data}}
             <a href="/snippet/{{this._id}}"
                 class="searchitem mb-8 block p-6 bg-grey-100 rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <div class="flex">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                     {{this.name}}</h5>
+                <button class="mx-5 mb-2 bg-blue-500 text-white px-3 text-sm rounded">
+                    {{this.type}}
+                </button>
+
+                </div>
                 <p class="font-normal text-gray-700 dark:text-gray-400">{{this.desc}}</p>
             </a>
             {{/each}}
             {{#each codedata}}
             <a href="/code/{{this._id}}"
                 class="searchitem mb-8 block p-6 bg-grey-100 rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <div class="flex">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                     {{this.name}}</h5>
+                        <button class="mx-5 mb-2 bg-blue-500 text-white px-3 text-sm rounded">
+                    {{this.type}}
+                </button>
+                    
+                </div>
                 <p class="font-normal text-gray-700 dark:text-gray-400">{{this.desc}}</p>
-            <label class="mt-5 block text-gray-900 font-bold ">Preview</label>
-            <div class="my-3  p-4 rounded-md resize-none text-gray-800 bg-gray-50" id="{{this.name}}"></div>
+            
 
-            <textarea id="{{this._id}}" rows="10" id="code" name="code" placeholder="Paste Code..."
-                class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50" hidden>{{this.code}}</textarea>
+                <label class="mt-5 block text-gray-900 font-bold ">Preview</label>
+                <div class="my-3  p-4 rounded-md resize-none text-gray-800 bg-gray-50" id="{{this.name}}"></div>
+
+                <textarea id="{{this._id}}" rows="10" id="code" name="code" placeholder="Paste Code..."
+                    class="my-3 p-4 rounded-md resize-none text-gray-800 bg-gray-50" hidden>{{this.code}}</textarea>
             </a>
 
             <script>
-                
 
-                    document.getElementById("{{this.name}}").innerHTML = document.getElementById("{{this._id}}").value;
-                
-               
+
+                document.getElementById("{{this.name}}").innerHTML = document.getElementById("{{this._id}}").value;
+
+
             </script>
 
             {{/each}}
+
+            {{#each docsdata}}
+            <a href="/docs/{{this._id}}"
+                class="searchitem mb-8 block p-6 bg-grey-100 rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <div class="flex">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    {{this.name}}</h5>
+                <button class="mx-5 mb-2 bg-blue-500 text-white px-3 text-sm rounded">
+                    {{this.type}}
+                </button>
+
+                </div>
+
+                <p class="font-normal text-gray-700 dark:text-gray-400">{{this.desc}}</p>
+
+
+
+
+
+
+
+
+
+
+            </a>
+            {{/each}}
+
         </div>
     </div>
 
 </div>
 </div>
-
 <style>
     .center {
         display: flex;

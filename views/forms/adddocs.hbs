@@ -14,7 +14,7 @@
 
 <section class="docs-section">
 
-    <div>
+    <div class="docdiv-1">
 
         <form action="/adddocs" method="post" class="space-y-6 ng-untouched ng-pristine ng-valid">
 
@@ -66,7 +66,8 @@
             }
 
         </script>
-
+<div class="h-96">
+</div>
 
     </div>
 
@@ -76,7 +77,7 @@
         {{>searchbar}}
 
         <div class="center">
-            <div id="parent" class="width">
+            <div id="parent" class="docdiv-2 width">
                 {{#if err}}
                 <h1>No data </h1>
                 {{/if}}
@@ -150,6 +151,38 @@
     .width {
         width: 40vw;
         margin-top: 50px;
+    }
+
+     .docdiv-1 {
+        overflow-y: scroll;
+        padding-left: 10px;
+        padding-right: 10px;
+        height: 100vh;
+                -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .docdiv-1::-webkit-scrollbar {
+        display: none;
+    }
+
+    .docdiv-2 {
+        overflow-y: scroll;
+        padding-left: 10px;
+        padding-right: 10px;
+        height: 100vh;
+                -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .docdiv-2::-webkit-scrollbar {
+        display: none;
     }
 </style>
 

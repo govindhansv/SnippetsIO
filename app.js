@@ -11,7 +11,7 @@ const cloudinary = require("cloudinary");
 var logger = require('morgan');
 var db = require('./connection');
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var webgenRouter = require('./routes/webgen');
 
 const hbs = require('express-handlebars');
 var app = express();
@@ -48,7 +48,7 @@ cloudinary.config({
 
 app.use(fileUpload());
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/webgen', webgenRouter);
 
 
 
